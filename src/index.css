@@ -5,3 +5,28 @@
 body {
 	@apply bg-slate-900 text-white;
 }
+
+.sorter {
+	position: relative;
+}
+
+.sorter[data-is-sort='true']::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: -20px;
+	border: 7px solid transparent;
+	border-bottom-color: white;
+	display: inline-block;
+}
+
+.sorter[data-is-sort='true'][data-sort-dir='desc']::after {
+	transform: rotate(180deg) translateY(-7px);
+}
+
+@media (max-width: 768px) {
+	.sorter[data-is-sort='true']::after {
+		right: 25%;
+		top: 20px;
+	}
+}
