@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Col, Table } from "~/bits";
+import { Col, Row, Table } from "~/bits";
 import { CountryData } from "~/data";
 import { By, Order, getFlagUrl, getTotalMedalsCount, printMedalCount, sortCountries } from "~/utils";
 
@@ -58,37 +58,40 @@ export const MedalsTable = (props: Props) => {
             onClick: changeSortBy('total'),
         },
     ];
-
-    const rows = countries.map(country => [
-        (
-            <div className="flex items-center gap-2">
-                <img src={getFlagUrl(country.code)} alt={country.name} />
-                <span>
-                    {country.name}
-                </span>
-            </div>
-        ),
-        (
-            <div className="bg-yellow-400 p-3 rounded-full w-10 h-10 md:w-14 md:h-14 flex justify-center items-center">
-                {printMedalCount(country.medals.gold)}
-            </div>
-        ),
-        (
-            <div className="bg-gray-400 p-3 rounded-full w-10 h-10 md:w-14 md:h-14 flex justify-center items-center">
-                {printMedalCount(country.medals.silver)}
-            </div>
-        ),
-        (
-            <div className="bg-amber-700 p-3 rounded-full w-10 h-10 md:w-14 md:h-14 flex justify-center items-center">
-                {printMedalCount(country.medals.bronze)}
-            </div>
-        ),
-        (
-            <div className="bg-slate-500 p-3 rounded-full w-10 h-10 md:w-14 md:h-14 flex justify-center items-center">
-                {getTotalMedalsCount(country)}
-            </div>
-        ),
-    ]);
+    
+    const rows: Row[] = countries.map(country => ({
+        key: country.name,
+        items: [
+            (
+                <div className="flex items-center gap-2">
+                    <img src={getFlagUrl(country.code)} alt={country.name} />
+                    <span>
+                        {country.name}
+                    </span>
+                </div>
+            ),
+            (
+                <div className="bg-yellow-400 p-3 rounded-full w-10 h-10 md:w-14 md:h-14 flex justify-center items-center">
+                    {printMedalCount(country.medals.gold)}
+                </div>
+            ),
+            (
+                <div className="bg-gray-400 p-3 rounded-full w-10 h-10 md:w-14 md:h-14 flex justify-center items-center">
+                    {printMedalCount(country.medals.silver)}
+                </div>
+            ),
+            (
+                <div className="bg-amber-700 p-3 rounded-full w-10 h-10 md:w-14 md:h-14 flex justify-center items-center">
+                    {printMedalCount(country.medals.bronze)}
+                </div>
+            ),
+            (
+                <div className="bg-slate-500 p-3 rounded-full w-10 h-10 md:w-14 md:h-14 flex justify-center items-center">
+                    {getTotalMedalsCount(country)}
+                </div>
+            ),
+        ],
+    }));
 
     return (
         <Table

@@ -1,3 +1,4 @@
+import { Key } from "react";
 import { Order } from "~/utils";
 
 export type Col<SortKey extends string> = {
@@ -7,9 +8,14 @@ export type Col<SortKey extends string> = {
     onClick?: () => void;
 }
 
+export type Row = {
+    key: Key;
+    items: JSX.Element[];
+}
+
 type Props<SortKey extends string> = {
     cols: Col<SortKey>[];
-    rows: JSX.Element[][];
+    rows: Row[];
     sortDir: Order;
     sortKey: SortKey;
 }
@@ -36,10 +42,10 @@ export const Table = <SortKey extends string>(props: Props<SortKey>) => {
         )
     });
 
-    const rows = props.rows.map((row, i) => {
-        const items = row.map((item, j) => (
+    const rows = props.rows.map(row => {
+        const items = row.items.map((item, j) => (
             <div
-                key={`${j}-item`}
+                key={`item-${j}`}
                 style={{ width: `${props.cols[j].width}%` }}
                 className={j > 0 ? "flex justify-center" : undefined}
             >
@@ -48,7 +54,7 @@ export const Table = <SortKey extends string>(props: Props<SortKey>) => {
         ));
 
         return (
-            <div key={`${i}-row`} className="flex py-4 border-b-2 border-slate-500">
+            <div key={row.key} className="flex py-4 border-b-2 border-slate-500">
                 {items}
             </div>
         );
