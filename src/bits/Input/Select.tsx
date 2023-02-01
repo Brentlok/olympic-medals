@@ -11,7 +11,6 @@ type Props<L extends string, V extends string> = {
 }
 
 const getValues = <L extends string, V extends string>(search: string, data: Value<L, V>[]) => {
-    console.log(search);
     const values: Value<L, V>[] = [];
 
     if (search.replaceAll(/\s+/g, '') === '') {

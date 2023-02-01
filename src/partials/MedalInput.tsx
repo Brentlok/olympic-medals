@@ -74,13 +74,13 @@ export const MedalInput = (props: Props) => {
                 <div>
                     <p className="text-center mb-2">Team</p>
                     <div className="flex gap-2 relative">
-                        {code && <img className="absolute -left-14 top-1/2 -translate-y-1/2" src={getFlagUrl(code)} alt={name} />}
+                        {code && <img className="hidden md:block absolute -left-14 top-1/2 -translate-y-1/2" src={getFlagUrl(code)} alt={name} />}
                         <Input.Select
                             value={name}
                             values={countries}
                             onSelect={handleAddCountry}
                             onChange={clear}
-                            className="w-48 text-xs py-3 md:py-2 md:w-72 md:text-base"
+                            className={`w-48 text-xs py-3 md:py-2 md:w-72 md:text-base ${code ? 'italic' : ''}`}
                         />
                     </div>
                 </div>

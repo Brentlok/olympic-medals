@@ -1,5 +1,5 @@
 import { Key } from "react";
-import { Order } from "~/utils";
+import { Order, confirm } from "~/utils";
 
 export type Col<SortKey extends string> = {
     name: string;
@@ -61,7 +61,7 @@ export const Table = <SortKey extends string>(props: Props<SortKey>) => {
             ? (
                 <div className="opacity-0 group-hover:opacity-70 transition-opacity absolute bg-slate-900 h-14 w-full flex justify-center items-center gap-10">
                     {row.edit && <img className="cursor-pointer" onClick={() => row.edit?.(row.key)} src="/edit.svg" />}
-                    {row.remove && <img className="cursor-pointer" onClick={() => row.remove?.(row.key)} src="/trash.svg" />}
+                    {row.remove && <img className="cursor-pointer" onClick={() => confirm(() => row.remove?.(row.key))} src="/trash.svg" />}
                 </div>
             )
             : null
