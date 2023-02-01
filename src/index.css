@@ -30,3 +30,7 @@ body {
 		top: 20px;
 	}
 }
+
+button[data-is-disabled="true"] {
+    @apply bg-gray-500 hover:bg-gray-500 cursor-not-allowed;
+}

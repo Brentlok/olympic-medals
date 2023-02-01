@@ -17,9 +17,10 @@ const getValues = <L extends string, V extends string>(search: string, data: Val
         return values;
     }
 
+    const lowerSearch = search.toLowerCase();
+
     for (const val of data) {
         const lowerLabel = val.label.toLowerCase();
-        const lowerSearch = search.toLowerCase();
 
         if (values.length === 5) {
             break;
@@ -34,7 +35,11 @@ const getValues = <L extends string, V extends string>(search: string, data: Val
 }
 
 export const Select = <L extends string, V extends string>(props: Props<L, V>) => {
-    const [value, setValue] = useState(props.value ?? '');
+    const [value, setValue] = useState('');
+
+    useEffect(() => {
+        setValue(props.value ?? '');
+    }, [props.value]);
 
     const handleClick = (value: Value<L, V>) => {
         setValue(value.label);
