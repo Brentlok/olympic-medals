@@ -1,7 +1,7 @@
 # Olympic Medals
 ## Recruitment task
 
-[Demo](olympic.hbieszczad.pl)
+``npm run dev`` or [Demo](olympic.hbieszczad.pl)
 
 Repo created using ``npm create vite@latest`` the only additional package is tailwindcss
 
