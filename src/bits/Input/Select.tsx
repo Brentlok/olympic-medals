@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export type Value<L extends string, V extends string> = { label: L; value: V };
 
@@ -41,14 +41,29 @@ export const Select = <L extends string, V extends string>(props: Props<L, V>) =
         setValue(props.value ?? '');
     }, [props.value]);
 
-    const handleClick = (value: Value<L, V>) => {
-        setValue(value.label);
-        props.onSelect(value);
+    const handleClick = (val: Value<L, V>) => {
+        setValue(val.label);
+        props.onSelect(val);
     }
 
-    const handleChange = (value: string) => {
-        setValue(value);
-        props.onChange?.(value);
+    const handleChange = (val: string) => {
+        setValue(val);
+        props.onChange?.(val);
+    }
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key !== 'Enter') {
+            return;
+        }
+
+        e.preventDefault();
+        const val = getValues(value, props.values).find(() => true);
+
+        if (!val) {
+            return;
+        }
+
+        handleClick(val);
     }
 
     const values = getValues(value, props.values).map(x => (
@@ -68,6 +83,7 @@ export const Select = <L extends string, V extends string>(props: Props<L, V>) =
                 type='text'
                 value={value}
                 onChange={e => handleChange(e.target.value)}
+                onKeyDown={handleKeyDown}
             />
             {values.length > 0 && value !== props.value && (
                 <div className="absolute flex flex-col bg-white w-full p-2 top-12 border-2 border-slate-500 rounded-xl">
