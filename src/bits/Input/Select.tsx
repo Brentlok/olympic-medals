@@ -64,7 +64,7 @@ export const Select = <L extends string, V extends string>(props: Props<L, V>) =
             return;
         }
 
-        if (e.key === 'Backspace') {
+        if (e.key === 'Backspace' && value === props.value) {
             e.preventDefault();
             handleChange('');
         }
