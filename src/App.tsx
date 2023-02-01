@@ -19,7 +19,12 @@ const App = () => {
     }
 
     const submitCountryEdit = (country: CountryData) => {
+        setEdited(undefined);
         setCountries(state => state.map(x => x.name !== country.name ? x : country));
+    }
+
+    const cancelEdit = () => {
+        setEdited(undefined);
     }
 
     const addedCodes = countries.map(country => country.code);
@@ -34,6 +39,7 @@ const App = () => {
                 removeCountry={removeCountry}
             />
             <MedalInput
+                cancelEdit={cancelEdit}
                 data={edited}
                 alreadyAdded={addedCodes}
                 submit={submit}

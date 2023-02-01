@@ -8,6 +8,7 @@ type Props = {
     alreadyAdded: CountryCode[];
     data?: CountryData;
     submit: (country: CountryData) => void;
+    cancelEdit: () => void;
 }
 
 const codes = Object.keys(countriesData) as CountryCode[];
@@ -49,6 +50,7 @@ export const MedalInput = (props: Props) => {
         setGold(0);
         setSilver(0);
         setBronze(0);
+        props.cancelEdit();
     }
 
     const submit = () => {
