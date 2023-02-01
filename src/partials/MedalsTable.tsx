@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import { Col, Row, Table } from "~/bits";
 import { CountryData } from "~/data";
 import { By, Order, getFlagUrl, getTotalMedalsCount, printMedalCount, sortCountries } from "~/utils";
 
 type Props = {
     data: CountryData[];
+    removeCountry: (name: Key) => void;
+    editCountry: (name: Key) => void;
 }
 
 export const MedalsTable = (props: Props) => {
@@ -58,9 +60,11 @@ export const MedalsTable = (props: Props) => {
             onClick: changeSortBy('total'),
         },
     ];
-    
+
     const rows: Row[] = countries.map(country => ({
         key: country.name,
+        edit: props.editCountry,
+        remove: props.removeCountry,
         items: [
             (
                 <div className="flex items-center gap-2">

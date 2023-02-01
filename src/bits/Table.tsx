@@ -11,6 +11,8 @@ export type Col<SortKey extends string> = {
 export type Row = {
     key: Key;
     items: JSX.Element[];
+    edit?: (key: Key) => void;
+    remove?: (key: Key) => void;
 }
 
 type Props<SortKey extends string> = {
@@ -53,9 +55,24 @@ export const Table = <SortKey extends string>(props: Props<SortKey>) => {
             </div>
         ));
 
+        const canHover = row.edit || row.remove;
+
+        const hover = canHover
+            ? (
+                <div className="opacity-0 group-hover:opacity-70 transition-opacity absolute bg-slate-900 h-14 w-full flex justify-center items-center gap-10">
+                    {row.edit && <img className="cursor-pointer" onClick={() => row.edit?.(row.key)} src="/edit.svg" />}
+                    {row.remove && <img className="cursor-pointer" onClick={() => row.remove?.(row.key)} src="/trash.svg" />}
+                </div>
+            )
+            : null
+
         return (
-            <div key={row.key} className="flex py-4 border-b-2 border-slate-500">
+            <div
+                key={row.key}
+                className="flex py-4 border-b-2 border-slate-500 relative group items-center"
+            >
                 {items}
+                {hover}
             </div>
         );
     });

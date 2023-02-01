@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Input } from "~/bits";
 import { Value } from "~/bits/Input";
 import { Country, CountryCode, CountryData, countries as countriesData } from "~/data";
@@ -13,11 +13,23 @@ type Props = {
 const codes = Object.keys(countriesData) as CountryCode[];
 
 export const MedalInput = (props: Props) => {
-    const [name, setName] = useState<Country | undefined>(props.data?.name);
-    const [code, setCode] = useState<CountryCode | undefined>(props.data?.code);
-    const [gold, setGold] = useState(props.data?.medals.gold ?? 0);
-    const [silver, setSilver] = useState(props.data?.medals.silver ?? 0);
-    const [bronze, setBronze] = useState(props.data?.medals.bronze ?? 0);
+    const [name, setName] = useState<Country | undefined>();
+    const [code, setCode] = useState<CountryCode | undefined>();
+    const [gold, setGold] = useState(0);
+    const [silver, setSilver] = useState(0);
+    const [bronze, setBronze] = useState(0);
+
+    useEffect(() => {
+        if (!props.data) {
+            return;
+        }
+
+        setName(props.data.name);
+        setCode(props.data.code);
+        setGold(props.data.medals.gold);
+        setSilver(props.data.medals.silver);
+        setBronze(props.data.medals.bronze);
+    }, [props.data]);
 
     const countries: Value<Country, CountryCode>[] = codes
         .filter(code => !props.alreadyAdded.includes(code))
