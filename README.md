@@ -16,5 +16,5 @@ Repo created using ``npm create vite@latest`` the only additional package is tai
 
 ### You can 
 - select country from given list, and then assign to it how much gold/silver/bronze medals they've won
-- sort by team name, number of gold/silver/bronze/total medals - ascending or descending by toggle
+- sort by team name, number of gold/silver/bronze/total medals - ascending or descending by toggle (when two countries have for example the same amount of total medals they're sorted by other values in that direction total, name, gold, silver, bronze)
 - edit existing country or remove it
