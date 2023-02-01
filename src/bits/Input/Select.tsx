@@ -26,7 +26,7 @@ const getValues = <L extends string, V extends string>(search: string, data: Val
 
         const lowerLabel = val.label.toLowerCase();
 
-        if (lowerLabel.startsWith(lowerSearch)) {
+        if (lowerLabel.includes(lowerSearch)) {
             values.push(val);
         }
     }
@@ -64,7 +64,7 @@ export const Select = <L extends string, V extends string>(props: Props<L, V>) =
             return;
         }
 
-        if (e.key === 'Backspace' && value === props.value) {
+        if (value === props.value) {
             e.preventDefault();
             handleChange('');
         }

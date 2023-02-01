@@ -12,6 +12,10 @@ const App = () => {
 
     const removeCountry = (name: Key) => {
         setCountries(state => state.filter(country => country.name !== name));
+
+        if (edited?.name === name) {
+            cancelEdit();
+        }
     }
 
     const editCountry = (name: Key) => {

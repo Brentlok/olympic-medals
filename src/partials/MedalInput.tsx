@@ -22,6 +22,7 @@ export const MedalInput = (props: Props) => {
 
     useEffect(() => {
         if (!props.data) {
+            clear();
             return;
         }
 
