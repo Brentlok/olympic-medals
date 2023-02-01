@@ -13,8 +13,8 @@ type Props = {
 const codes = Object.keys(countriesData) as CountryCode[];
 
 export const MedalInput = (props: Props) => {
-    const [name, setName] = useState<Country | undefined>();
-    const [code, setCode] = useState<CountryCode | undefined>();
+    const [name, setName] = useState<Country>();
+    const [code, setCode] = useState<CountryCode>();
     const [gold, setGold] = useState(0);
     const [silver, setSilver] = useState(0);
     const [bronze, setBronze] = useState(0);

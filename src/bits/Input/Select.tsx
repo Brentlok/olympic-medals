@@ -20,11 +20,11 @@ const getValues = <L extends string, V extends string>(search: string, data: Val
     const lowerSearch = search.toLowerCase();
 
     for (const val of data) {
-        const lowerLabel = val.label.toLowerCase();
-
         if (values.length === 5) {
             break;
         }
+
+        const lowerLabel = val.label.toLowerCase();
 
         if (lowerLabel.startsWith(lowerSearch)) {
             values.push(val);
@@ -72,7 +72,7 @@ export const Select = <L extends string, V extends string>(props: Props<L, V>) =
 
     const values = getValues(value, props.values).map(x => (
         <div
-            key={x.label}
+            key={`${x.label}-${x.value}`}
             onClick={() => handleClick(x)}
             className="text-black p-2 w-full cursor-pointer rounded-xl hover:bg-slate-500 hover:text-white transition-colors"
         >
