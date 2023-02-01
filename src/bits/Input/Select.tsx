@@ -11,6 +11,7 @@ type Props<L extends string, V extends string> = {
 }
 
 const getValues = <L extends string, V extends string>(search: string, data: Value<L, V>[]) => {
+    console.log(search);
     const values: Value<L, V>[] = [];
 
     if (search.replaceAll(/\s+/g, '') === '') {
@@ -52,18 +53,22 @@ export const Select = <L extends string, V extends string>(props: Props<L, V>) =
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key !== 'Enter') {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const val = getValues(value, props.values).find(() => true);
+
+            if (!val) {
+                return;
+            }
+
+            handleClick(val);
             return;
         }
 
-        e.preventDefault();
-        const val = getValues(value, props.values).find(() => true);
-
-        if (!val) {
-            return;
+        if (e.key === 'Backspace') {
+            e.preventDefault();
+            handleChange('');
         }
-
-        handleClick(val);
     }
 
     const values = getValues(value, props.values).map(x => (
