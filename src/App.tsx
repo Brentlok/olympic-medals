@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CountryData } from "~/data";
-import { MedalsTable } from "~/partials";
+import { MedalInput, MedalsTable } from "~/partials";
+import { Button } from "./bits";
 
 const mock: CountryData[] = [
     { medals: { bronze: 1, gold: 2, silver: 1 }, name: 'Germany', code: 'de' },
@@ -14,8 +15,12 @@ const App = () => {
         <main className="px-4 py-16 flex flex-col items-center gap-10">
             <h1 className="text-4xl">Olympic Medals</h1>
             <MedalsTable data={countries} />
-            <div>
-                form
+            <div className="flex flex-col items-center gap-4">
+                <MedalInput />
+                <Button
+                    name="Add"
+                    onClick={() => { }}
+                />
             </div>
         </main>
     );
